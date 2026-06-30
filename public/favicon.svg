@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130" fill="none">
+  <!-- Three navy bars (behind flame) -->
+  <rect x="8"  y="16" width="114" height="18" rx="9" fill="#3B3B8F"/>
+  <rect x="8"  y="56" width="114" height="18" rx="9" fill="#3B3B8F"/>
+  <rect x="8"  y="96" width="114" height="18" rx="9" fill="#3B3B8F"/>
+
+  <!--
+    Flame outline — single closed S-curve perimeter (no self-intersection).
+    Trace clockwise from top-tip:
+      → right outer edge of upper lobe (sweeps far right)
+      → waist descent (crosses center right→left, going down)
+      → left outer edge of lower lobe (sweeps far left)
+      → around bottom tip
+      → right inner edge of lower lobe (going up)
+      → waist ascent (crosses center right→left, going up)
+      → left inner edge of upper lobe (going up to tip)
+  -->
+  <path d="
+    M 52 5
+    C 70 3, 118 24, 116 52
+    C 114 72, 94 82, 74 82
+    C 66 84, 56 88, 48 90
+    C 36 94, 22 104, 26 114
+    C 30 122, 44 128, 56 124
+    C 68 120, 76 108, 72 96
+    C 68 86, 62 80, 60 78
+    C 58 74, 54 68, 54 66
+    C 50 60, 40 46, 40 28
+    C 40 12, 46 4, 52 5 Z
+  " fill="#C0252C"/>
+
+  <!-- Inner bright red highlight (slightly inset same S-path) -->
+  <path d="
+    M 54 11
+    C 70 8, 112 28, 110 54
+    C 108 70, 90 80, 72 80
+    C 64 82, 54 86, 48 88
+    C 38 92, 28 102, 30 112
+    C 34 120, 46 124, 56 120
+    C 66 116, 72 104, 68 94
+    C 64 84, 60 78, 58 76
+    C 56 72, 52 66, 52 64
+    C 48 58, 40 44, 42 28
+    C 44 14, 50 10, 54 11 Z
+  " fill="#E03030"/>
+
+  <!-- Eye — white sclera -->
+  <ellipse cx="86" cy="48" rx="16" ry="18" fill="white"/>
+  <!-- Eye — blue iris -->
+  <circle cx="86" cy="49" r="11" fill="#1E7EB8"/>
+  <!-- Eye — dark pupil -->
+  <circle cx="86" cy="49" r="6" fill="#0A0A0A"/>
+  <!-- Eye — white highlight -->
+  <circle cx="90" cy="45" r="3.5" fill="white" opacity="0.9"/>
+</svg>
