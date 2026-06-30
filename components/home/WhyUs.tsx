@@ -50,8 +50,8 @@ export default function WhyUs() {
               <div className="text-xs text-slate-400 mt-0.5">Established · Rajula</div>
             </div>
             <div className="absolute -top-4 -left-4 bg-brand-500 rounded-2xl px-5 py-3 shadow-xl">
-              <div className="text-2xl font-black text-slate-900">500+</div>
-              <div className="text-xs font-semibold text-slate-700">Happy Clients</div>
+              <div className="text-2xl font-black text-white">500+</div>
+              <div className="text-xs font-semibold text-white/80">Happy Clients</div>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ export default function WhyUs() {
                   className={`reveal delay-${(i + 1) * 100} flex gap-4 p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors group`}
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform">
-                    <Icon className="w-5 h-5 text-slate-900" strokeWidth={1.8} />
+                    <Icon className="w-5 h-5 text-white" strokeWidth={1.8} />
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 dark:text-white mb-1">{title}</h3>

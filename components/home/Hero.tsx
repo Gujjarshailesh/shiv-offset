@@ -153,7 +153,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4 animate-fadeInUp delay-400">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2.5 bg-brand-500 hover:bg-brand-400 text-slate-900 font-black px-8 py-4 rounded-xl btn-glow text-base transition-colors"
+              className="group inline-flex items-center gap-2.5 bg-brand-500 hover:bg-brand-400 text-white font-black px-8 py-4 rounded-xl btn-glow text-base transition-colors"
             >
               Get Free Quote
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
