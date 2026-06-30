@@ -110,7 +110,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl img-zoom aspect-[4/3]">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl img-zoom aspect-[4/3]">
                 <Image
                   src="/images/about/team.jpg"
                   alt="Shiv Offset printing facility"

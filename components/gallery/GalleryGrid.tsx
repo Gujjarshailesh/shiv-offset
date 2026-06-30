@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { AnimatePresence, LayoutGroup, motion } from "motion/react"
 
 const galleryItems = [
   { src: "/images/gallery/g-offset-1.jpg",    label: "Offset Printing Press",       cat: "Offset" },
@@ -35,13 +36,16 @@ export default function GalleryGrid() {
   const visible = active === "All" ? galleryItems : galleryItems.filter((i) => i.cat === active)
 
   return (
-    <>
+    <LayoutGroup>
       {/* Category filter chips */}
       <div className="flex flex-wrap gap-2 mb-10 justify-center">
         {cats.map((cat) => (
-          <button
+          <motion.button
             key={cat}
             onClick={() => setActive(cat)}
+            layout
+            whileHover={{ y: -2, scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               active === cat
                 ? "bg-brand-500 text-white border-brand-500 shadow-md shadow-brand-500/25 scale-105"
@@ -49,7 +53,7 @@ export default function GalleryGrid() {
             }`}
           >
             {cat}
-          </button>
+          </motion.button>
         ))}
       </div>
 
@@ -61,33 +65,44 @@ export default function GalleryGrid() {
 
       {/* Masonry grid */}
       <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
-        {visible.map((item, i) => (
-          <div
-            key={item.src + item.cat}
-            className="group relative overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 shadow-sm hover:shadow-2xl transition-all duration-300 break-inside-avoid cursor-pointer"
-          >
-            <div className="img-zoom relative w-full">
-              <Image
-                src={item.src}
-                alt={item.label}
-                width={500}
-                height={380}
-                className="w-full h-auto object-cover"
-                sizes="(max-width:640px)50vw,(max-width:1024px)33vw,25vw"
-                loading={i < 8 ? "eager" : "lazy"}
-              />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-end p-4 text-center">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-brand-400 mb-1.5 bg-brand-500/15 px-3 py-0.5 rounded-full">
-                {item.cat}
-              </span>
-              <p className="font-bold text-white text-sm leading-snug translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                {item.label}
-              </p>
-            </div>
-          </div>
-        ))}
+        <AnimatePresence mode="popLayout">
+          {visible.map((item, i) => (
+            <motion.div
+              key={item.src + item.cat}
+              layout
+              initial={{ opacity: 0, y: 22, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.96 }}
+              transition={{ duration: 0.34, ease: "easeOut", delay: Math.min(i * 0.025, 0.18) }}
+              whileHover={{ y: -6, scale: 1.015 }}
+              className="group relative overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 shadow-sm hover:shadow-2xl transition-shadow duration-300 break-inside-avoid cursor-pointer"
+            >
+              <div className="img-zoom relative w-full">
+                <Image
+                  src={item.src}
+                  alt={item.label}
+                  width={500}
+                  height={380}
+                  className="w-full h-auto object-cover"
+                  sizes="(max-width:640px)50vw,(max-width:1024px)33vw,25vw"
+                  loading={i < 8 ? "eager" : "lazy"}
+                />
+              </div>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-4 text-center"
+                initial={false}
+              >
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-400 mb-1.5 bg-brand-500/15 px-3 py-0.5 rounded-full">
+                  {item.cat}
+                </span>
+                <p className="font-bold text-white text-sm leading-snug translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  {item.label}
+                </p>
+              </motion.div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
-    </>
+    </LayoutGroup>
   )
 }

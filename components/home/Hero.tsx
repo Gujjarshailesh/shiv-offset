@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { IconCheck, IconPhone, IconWhatsApp } from "@/components/ui/Icons"
 
 const slides = [
@@ -40,29 +41,16 @@ const badges = ["ISO Quality Standards", "On-Time Delivery", "Pan-India Clients"
 
 export default function Hero() {
   const [current, setCurrent] = useState(0)
-  const [prev, setPrev] = useState<number | null>(null)
-  const [transitioning, setTransitioning] = useState(false)
-  const [hydrated, setHydrated] = useState(false)
-
-  useEffect(() => { setHydrated(true) }, [])
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setPrev(current)
-      setTransitioning(true)
-      setTimeout(() => {
-        setCurrent((c) => (c + 1) % slides.length)
-        setTransitioning(false)
-      }, 700)
-    }, 6000)
+    const t = setInterval(() => setCurrent((c) => (c + 1) % slides.length), 6000)
     return () => clearInterval(t)
-  }, [current])
+  }, [])
 
   const goTo = (i: number) => {
     if (i === current) return
-    setPrev(current)
-    setTransitioning(true)
-    setTimeout(() => { setCurrent(i); setTransitioning(false) }, 700)
+    setCurrent(i)
   }
 
   return (
@@ -70,27 +58,31 @@ export default function Hero() {
       {/* Background images with Ken Burns + crossfade */}
       <div className="absolute inset-0">
         {slides.map((slide, i) => {
-          // Only render slide 0 on server; render others after hydration to save bandwidth
-          if (!hydrated && i !== 0) return null
           return (
-            <div
+            <motion.div
               key={i}
               className="absolute inset-0 transition-opacity duration-700"
-              style={{ opacity: i === current ? 1 : 0 }}
+              initial={false}
+              animate={{ opacity: i === current ? 1 : 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.9, ease: "easeOut" }}
             >
-              <div className={`absolute inset-0 ${i === current ? "animate-kenBurns" : ""}`}>
+              <motion.div
+                className="absolute inset-0"
+                animate={i === current && !reduceMotion ? { scale: [1.08, 1.02], x: ["0%", "-1%"] } : { scale: 1.02, x: "0%" }}
+                transition={{ duration: 7, ease: "easeOut" }}
+              >
                 <Image
                   src={slide.src}
                   alt={slide.alt}
                   fill
                   className="object-cover"
                   priority={i === 0}
-                  quality={i === 0 ? 75 : 65}
+                  quality={75}
                   sizes="100vw"
                   loading={i === 0 ? "eager" : "lazy"}
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           )
         })}
 
@@ -109,9 +101,12 @@ export default function Hero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-36 pb-24">
         <div className="max-w-4xl">
           {/* Tag badge */}
-          <div
+          <motion.div
             key={`tag-${current}`}
             className="inline-flex items-center gap-2.5 glass-dark rounded-full px-5 py-2 mb-7 animate-fadeInUp"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75" />
@@ -120,81 +115,127 @@ export default function Hero() {
             <span className="text-xs font-semibold text-white/80 uppercase tracking-widest">
               {slides[current].tag}
             </span>
-          </div>
+          </motion.div>
 
           {/* Headline */}
-          <div key={`h-${current}`} className="mb-4">
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.0] animate-fadeInUp delay-100">
-              {slides[current].headline[0]}
-              <br />
-              <span className="text-gradient">{slides[current].headline[1]}</span>
-            </h1>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white/60 mt-2 animate-fadeInUp delay-200">
-              <span className="relative inline-block">
-                {slides[current].sub}
-                <svg className="absolute -bottom-1 left-0 w-full opacity-60" viewBox="0 0 400 8" fill="none">
-                  <path d="M2 5C80 2 200 1.5 398 5" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" />
-                </svg>
-              </span>
-            </h2>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`h-${current}`}
+              className="mb-4"
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 24, filter: reduceMotion ? "none" : "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: reduceMotion ? 0 : -16, filter: reduceMotion ? "none" : "blur(8px)" }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+            >
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.0]">
+                {slides[current].headline[0]}
+                <br />
+                <span className="text-gradient">{slides[current].headline[1]}</span>
+              </h1>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white/60 mt-2">
+                <span className="relative inline-block">
+                  {slides[current].sub}
+                  <motion.svg
+                    className="absolute -bottom-1 left-0 w-full opacity-60"
+                    viewBox="0 0 400 8"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.8, delay: 0.25, ease: "easeOut" }}
+                  >
+                    <motion.path d="M2 5C80 2 200 1.5 398 5" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" />
+                  </motion.svg>
+                </span>
+              </h2>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Trust badges */}
-          <div className="flex flex-wrap gap-4 mt-6 mb-10 animate-fadeInUp delay-300">
+          <motion.div
+            className="flex flex-wrap gap-4 mt-6 mb-10 animate-fadeInUp delay-300"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+          >
             {badges.map((b) => (
-              <div key={b} className="flex items-center gap-2 text-xs text-slate-400">
+              <motion.div key={b} className="flex items-center gap-2 text-xs text-slate-400" whileHover={{ y: -2, color: "#f8fafc" }}>
                 <IconCheck className="w-3.5 h-3.5 text-brand-400 flex-shrink-0" strokeWidth={2.5} />
                 {b}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4 animate-fadeInUp delay-400">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2.5 bg-brand-500 hover:bg-brand-400 text-white font-black px-8 py-4 rounded-xl btn-glow text-base transition-colors"
+          <motion.div
+            className="flex flex-wrap gap-4 animate-fadeInUp delay-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.25 }}
+          >
+            <motion.div whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 bg-brand-500 hover:bg-brand-400 text-white font-black px-8 py-4 rounded-xl btn-glow text-base transition-colors"
+              >
+                Get Free Quote
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </Link>
+            </motion.div>
+            <motion.a
+              href="https://wa.me/918140332132?text=Hi%20Shiv%20Offset%2C%20I%27d%20like%20a%20print%20quote."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 border-2 border-green-400/60 text-green-400 hover:bg-green-400/10 hover:border-green-300 font-bold px-7 py-4 rounded-xl transition-all text-base"
+              whileHover={{ y: -3, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              Get Free Quote
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Link>
-<a
-               href="https://wa.me/918140332132?text=Hi%20Shiv%20Offset%2C%20I%27d%20like%20a%20print%20quote."
-               target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-2.5 border-2 border-green-400/60 text-green-400 hover:bg-green-400/10 hover:border-green-300 font-bold px-7 py-4 rounded-xl transition-all text-base"
-             >
-               <IconWhatsApp className="w-5 h-5 flex-shrink-0" />
-               WhatsApp Us
-             </a>
-             <a
-               href="tel:08140332132"
-               className="hidden sm:inline-flex items-center gap-2 border border-white/20 text-white/70 hover:text-white hover:border-white/40 font-semibold px-6 py-4 rounded-xl transition-all text-sm"
-             >
-               <IconPhone className="w-4 h-4 flex-shrink-0" strokeWidth={2} />
-               081403 32132
-             </a>
-          </div>
+              <IconWhatsApp className="w-5 h-5 flex-shrink-0" />
+              WhatsApp Us
+            </motion.a>
+            <motion.a
+              href="tel:08140332132"
+              className="hidden sm:inline-flex items-center gap-2 border border-white/20 text-white/70 hover:text-white hover:border-white/40 font-semibold px-6 py-4 rounded-xl transition-all text-sm"
+              whileHover={{ y: -3, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <IconPhone className="w-4 h-4 flex-shrink-0" strokeWidth={2} />
+              081403 32132
+            </motion.a>
+          </motion.div>
         </div>
 
         {/* Stats row */}
-        <div className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-3 animate-fadeInUp delay-500 max-w-2xl">
+        <motion.div
+          className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-3 animate-fadeInUp delay-500 max-w-2xl"
+          initial="hidden"
+          animate="show"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.35 } } }}
+        >
           {stats.map((s) => (
-            <div key={s.label} className="glass rounded-2xl px-4 py-4 text-center group hover:bg-brand-500/10 transition-colors border border-white/5 hover:border-brand-500/25">
+            <motion.div
+              key={s.label}
+              className="glass rounded-2xl px-4 py-4 text-center group hover:bg-brand-500/10 transition-colors border border-white/5 hover:border-brand-500/25"
+              variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}
+              whileHover={{ y: -4, scale: 1.02 }}
+            >
               <div className="text-3xl font-black text-brand-400 mb-1 group-hover:scale-110 transition-transform">{s.value}</div>
               <div className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">{s.label}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Slide controls */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
         {slides.map((_, i) => (
-          <button
+          <motion.button
             key={i}
             onClick={() => goTo(i)}
+            layout
+            whileHover={{ scale: 1.12 }}
+            whileTap={{ scale: 0.9 }}
             className={`transition-all duration-400 rounded-full ${
               i === current
                 ? "w-10 h-2.5 bg-brand-500 shadow-lg shadow-brand-500/40"
