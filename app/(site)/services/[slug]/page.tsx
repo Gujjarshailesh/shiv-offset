@@ -12,14 +12,37 @@ export async function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }))
 }
 
+const BASE_URL = "https://www.shivoffset.in"
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const s = getServiceBySlug(slug)
   if (!s) return { title: "Not Found" }
   return {
-    title: s.title,
-    description: `${s.shortDesc} Shiv Offset, Rajula's trusted printing press, delivers premium ${s.title.toLowerCase()}.`,
-    openGraph: { images: [{ url: s.image }] },
+    title: `${s.title} in Rajula, Gujarat – Shiv Offset`,
+    description: `${s.shortDesc} Shiv Offset, Rajula's trusted printing press, delivers premium ${s.title.toLowerCase()} across Gujarat and India.`,
+    alternates: {
+      canonical: `${BASE_URL}/services/${s.slug}`,
+    },
+    openGraph: {
+      url: `${BASE_URL}/services/${s.slug}`,
+      title: `${s.title} – Shiv Offset Rajula`,
+      description: s.shortDesc,
+      images: [
+        {
+          url: `${BASE_URL}${s.image}`,
+          width: 1200,
+          height: 630,
+          alt: `${s.title} – Shiv Offset Rajula`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${s.title} – Shiv Offset Rajula`,
+      description: s.shortDesc,
+      images: [`${BASE_URL}${s.image}`],
+    },
   }
 }
 
@@ -30,8 +53,36 @@ export default async function ServiceDetailPage({ params }: Props) {
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3)
   const Icon = SERVICE_ICONS[service.slug]
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${BASE_URL}/services` },
+      { "@type": "ListItem", position: 3, name: service.title, item: `${BASE_URL}/services/${service.slug}` },
+    ],
+  }
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.shortDesc,
+    url: `${BASE_URL}/services/${service.slug}`,
+    image: `${BASE_URL}${service.image}`,
+    provider: {
+      "@type": "LocalBusiness",
+      "@id": `${BASE_URL}/#business`,
+      name: "Shiv Offset",
+    },
+    areaServed: { "@type": "State", name: "Gujarat" },
+    serviceType: service.title,
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       {/* Hero */}
       <section className="relative min-h-[55vh] flex items-end pb-16 overflow-hidden bg-navy-950">
         <div className="absolute inset-0">

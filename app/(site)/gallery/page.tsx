@@ -3,10 +3,35 @@ import Image from "next/image"
 import CTA from "@/components/home/CTA"
 import GalleryGrid from "@/components/gallery/GalleryGrid"
 
+const BASE_URL = "https://www.shivoffset.in"
+
 export const metadata: Metadata = {
-  title: "Gallery",
+  title: "Print Gallery – Offset, Digital, Packaging & More",
   description:
     "Browse Shiv Offset's print gallery — offset printing, digital printing, packaging, brochures, catalogues, books, and cards from our Rajula press room.",
+  alternates: {
+    canonical: `${BASE_URL}/gallery`,
+  },
+  openGraph: {
+    url: `${BASE_URL}/gallery`,
+    title: "Print Gallery – Shiv Offset Rajula",
+    description:
+      "From our press room to your hands — browse our offset printing, digital printing, packaging, brochures, and catalogue work.",
+    images: [
+      {
+        url: `${BASE_URL}/images/gallery/g-offset-1.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Shiv Offset Print Gallery – Rajula",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Print Gallery – Shiv Offset Rajula",
+    description: "Browse our offset printing, packaging, brochures, catalogues and more.",
+    images: [`${BASE_URL}/images/gallery/g-offset-1.jpg`],
+  },
 }
 
 export default function GalleryPage() {

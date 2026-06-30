@@ -1,7 +1,4 @@
-"use client"
-
 import Image from "next/image"
-import { useEffect, useRef } from "react"
 import { IconTrophy, IconTech, IconFactory, IconTruck } from "@/components/ui/Icons"
 
 const reasons = [
@@ -28,19 +25,8 @@ const reasons = [
 ]
 
 export default function WhyUs() {
-  const ref = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const ob = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible") }),
-      { threshold: 0.1 }
-    )
-    ref.current?.querySelectorAll(".reveal").forEach((el) => ob.observe(el))
-    return () => ob.disconnect()
-  }, [])
-
   return (
-    <section ref={ref} className="py-24 bg-white dark:bg-navy-950 relative overflow-hidden transition-colors duration-300" id="why-us">
+    <section className="py-24 bg-white dark:bg-navy-950 relative overflow-hidden transition-colors duration-300" id="why-us">
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand-50 dark:bg-brand-600/5 pointer-events-none" />
       <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-blue-50 dark:bg-blue-500/5 pointer-events-none" />
 
@@ -52,7 +38,9 @@ export default function WhyUs() {
               <Image
                 src="/images/about/facility.jpg"
                 alt="Shiv Offset facility — Rajula printing press"
-                fill className="object-cover"
+                fill
+                loading="lazy"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-navy-950/30 to-transparent" />

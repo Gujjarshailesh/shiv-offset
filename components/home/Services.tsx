@@ -1,25 +1,11 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useRef } from "react"
 import { services } from "@/data/services"
 import { SERVICE_ICONS } from "@/components/ui/Icons"
 
 export default function ServicesSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible") }),
-      { threshold: 0.08 }
-    )
-    sectionRef.current?.querySelectorAll(".reveal").forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section ref={sectionRef} className="bg-slate-50 dark:bg-navy-950 py-24 relative overflow-hidden transition-colors duration-300" id="services">
+    <section className="bg-slate-50 dark:bg-navy-950 py-24 relative overflow-hidden transition-colors duration-300" id="services">
       <div
         className="absolute inset-0 opacity-[0.03] dark:opacity-[0.03]"
         style={{
@@ -55,6 +41,7 @@ export default function ServicesSection() {
                     src={service.image}
                     alt={service.title}
                     fill
+                    loading="lazy"
                     className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-500"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />

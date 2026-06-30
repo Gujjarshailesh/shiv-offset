@@ -5,10 +5,35 @@ import { services } from "@/data/services"
 import { SERVICE_ICONS } from "@/components/ui/Icons"
 import CTA from "@/components/home/CTA"
 
+const BASE_URL = "https://www.shivoffset.in"
+
 export const metadata: Metadata = {
-  title: "Printing Services",
+  title: "Printing Services – Offset, Digital, Brochure, Packaging & More",
   description:
     "Full-service printing from Shiv Offset, Rajula — pre-press, offset printing, digital printing, post-press, card printing, brochure, catalogue, book, and box printing.",
+  alternates: {
+    canonical: `${BASE_URL}/services`,
+  },
+  openGraph: {
+    url: `${BASE_URL}/services`,
+    title: "Printing Services – Shiv Offset Rajula",
+    description:
+      "Pre-press to post-press, offset to digital — everything under one roof. 9 services, 500+ clients, all of Gujarat.",
+    images: [
+      {
+        url: `${BASE_URL}/images/services/offset-printing.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Shiv Offset printing services – Rajula",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Printing Services – Shiv Offset Rajula",
+    description: "Offset, digital, brochure, packaging and more — all under one roof in Rajula.",
+    images: [`${BASE_URL}/images/services/offset-printing.jpg`],
+  },
 }
 
 export default function ServicesPage() {

@@ -16,38 +16,50 @@ const equipment = [
   { label: "UV Coating Machine", sub: "Spot UV & Full-sheet" },
 ]
 
-function Counter({ end, suffix, prefix, label }: (typeof stats)[0]) {
+function useCountUp(end: number, started: boolean) {
   const [count, setCount] = useState(0)
-  const [started, setStarted] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ob = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStarted(true) }, { threshold: 0.5 })
-    if (ref.current) ob.observe(ref.current)
-    return () => ob.disconnect()
-  }, [])
-
   useEffect(() => {
     if (!started) return
-    const steps = 60
+    const steps = 50
     const increment = end / steps
     let current = 0
     const timer = setInterval(() => {
       current += increment
       if (current >= end) { setCount(end); clearInterval(timer) }
       else setCount(Math.floor(current))
-    }, 2000 / steps)
+    }, 1600 / steps)
     return () => clearInterval(timer)
   }, [started, end])
+  return count
+}
+
+function CounterRow() {
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const ob = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setStarted(true); ob.disconnect() } },
+      { threshold: 0.3 }
+    )
+    if (ref.current) ob.observe(ref.current)
+    return () => ob.disconnect()
+  }, [])
+
+  const counts = stats.map((s) => useCountUp(s.end, started))
 
   return (
-    <div ref={ref} className="text-center">
-      <div className="text-5xl md:text-6xl font-black text-white mb-2 tabular-nums">
-        {prefix}
-        <span className="text-gradient">{count.toLocaleString("en-IN")}</span>
-        {suffix}
-      </div>
-      <div className="text-slate-400 text-sm font-medium uppercase tracking-widest">{label}</div>
+    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 mb-20">
+      {stats.map((s, i) => (
+        <div key={s.label} className="text-center">
+          <div className="text-5xl md:text-6xl font-black text-white mb-2 tabular-nums">
+            {s.prefix}
+            <span className="text-gradient">{counts[i].toLocaleString("en-IN")}</span>
+            {s.suffix}
+          </div>
+          <div className="text-slate-400 text-sm font-medium uppercase tracking-widest">{s.label}</div>
+        </div>
+      ))}
     </div>
   )
 }
@@ -71,9 +83,7 @@ export default function Stats() {
           <div className="h-px flex-1 max-w-xs bg-gradient-to-l from-transparent to-brand-500/40" />
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 mb-20">
-          {stats.map((s) => <Counter key={s.label} {...s} />)}
-        </div>
+        <CounterRow />
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {equipment.map((item) => (

@@ -4,10 +4,35 @@ import { industries } from "@/data/industries"
 import { INDUSTRY_ICONS } from "@/components/ui/Icons"
 import CTA from "@/components/home/CTA"
 
+const BASE_URL = "https://www.shivoffset.in"
+
 export const metadata: Metadata = {
-  title: "Industries We Serve",
+  title: "Industries We Serve – Pharma, FMCG, Textile, Education & More",
   description:
     "Shiv Offset serves pharma, FMCG, textile, ceramics, corporate, hospitality, education, e-commerce, and more — with tailored offset and digital printing solutions from Rajula.",
+  alternates: {
+    canonical: `${BASE_URL}/industries`,
+  },
+  openGraph: {
+    url: `${BASE_URL}/industries`,
+    title: "Industries We Serve – Shiv Offset Rajula",
+    description:
+      "Printing solutions tailored for pharma, FMCG, textile, ceramics, hospitality, education, and 10+ other industries across Gujarat and India.",
+    images: [
+      {
+        url: `${BASE_URL}/images/services/digital-printing.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Shiv Offset – Industries Served",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Industries We Serve – Shiv Offset Rajula",
+    description: "Tailored print solutions for pharma, FMCG, textile, ceramics and more.",
+    images: [`${BASE_URL}/images/services/digital-printing.jpg`],
+  },
 }
 
 export default function IndustriesPage() {

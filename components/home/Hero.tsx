@@ -85,7 +85,7 @@ export default function Hero() {
                   fill
                   className="object-cover"
                   priority={i === 0}
-                  quality={i === 0 ? 90 : 75}
+                  quality={i === 0 ? 75 : 65}
                   sizes="100vw"
                   loading={i === 0 ? "eager" : "lazy"}
                 />
@@ -98,9 +98,9 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/75 to-navy-950/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/40" />
 
-        {/* Animated glow orbs */}
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-brand-600/8 rounded-full blur-[120px] pointer-events-none animate-floatSlow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/8 rounded-full blur-[100px] pointer-events-none animate-floatSlow delay-400" />
+        {/* Subtle radial glow — CSS only, no blur filter */}
+        <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(192,37,44,0.06) 0%, transparent 70%)" }} />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,59,143,0.07) 0%, transparent 70%)" }} />
       </div>
 
       {/* Dot grid overlay */}
@@ -124,12 +124,12 @@ export default function Hero() {
 
           {/* Headline */}
           <div key={`h-${current}`} className="mb-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.0] animate-fadeInUp delay-100">
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[1.0] animate-fadeInUp delay-100">
               {slides[current].headline[0]}
               <br />
               <span className="text-gradient">{slides[current].headline[1]}</span>
             </h1>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white/60 mt-2 animate-fadeInUp delay-200">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white/60 mt-2 animate-fadeInUp delay-200">
               <span className="relative inline-block">
                 {slides[current].sub}
                 <svg className="absolute -bottom-1 left-0 w-full opacity-60" viewBox="0 0 400 8" fill="none">
@@ -163,14 +163,14 @@ export default function Hero() {
 <a
                href="https://wa.me/918140332132?text=Hi%20Shiv%20Offset%2C%20I%27d%20like%20a%20print%20quote."
                target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-2.5 border-2 border-green-400/60 text-green-400 hover:bg-green-400/10 hover:border-green-300 font-bold px-7 py-4 rounded-xl backdrop-blur-sm transition-all text-base"
+               className="inline-flex items-center gap-2.5 border-2 border-green-400/60 text-green-400 hover:bg-green-400/10 hover:border-green-300 font-bold px-7 py-4 rounded-xl transition-all text-base"
              >
                <IconWhatsApp className="w-5 h-5 flex-shrink-0" />
                WhatsApp Us
              </a>
              <a
                href="tel:08140332132"
-               className="hidden sm:inline-flex items-center gap-2 border border-white/20 text-white/70 hover:text-white hover:border-white/40 font-semibold px-6 py-4 rounded-xl backdrop-blur-sm transition-all text-sm"
+               className="hidden sm:inline-flex items-center gap-2 border border-white/20 text-white/70 hover:text-white hover:border-white/40 font-semibold px-6 py-4 rounded-xl transition-all text-sm"
              >
                <IconPhone className="w-4 h-4 flex-shrink-0" strokeWidth={2} />
                081403 32132

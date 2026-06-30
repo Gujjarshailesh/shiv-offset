@@ -3,10 +3,35 @@ import Image from "next/image"
 import CTA from "@/components/home/CTA"
 import { IconTrophy, IconQuality, IconTruck, IconTech } from "@/components/ui/Icons"
 
+const BASE_URL = "https://www.shivoffset.in"
+
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Us – Shiv Offset Rajula Since 2014",
   description:
     "Learn about Shiv Offset — Rajula's trusted full-service printing press since 2014. Our story, milestones, equipment, and commitment to quality.",
+  alternates: {
+    canonical: `${BASE_URL}/about`,
+  },
+  openGraph: {
+    url: `${BASE_URL}/about`,
+    title: "About Shiv Offset – Printing Press Rajula Since 2014",
+    description:
+      "Over a decade of printing excellence from Rajula — built on quality, reliability, and a relentless passion for the craft. 500+ clients, 9 services.",
+    images: [
+      {
+        url: `${BASE_URL}/images/about/hero.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Shiv Offset facility – Rajula, Gujarat",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Shiv Offset – Rajula Printing Press",
+    description: "Over a decade of printing excellence from Rajula — built on quality and reliability.",
+    images: [`${BASE_URL}/images/about/hero.jpg`],
+  },
 }
 
 const milestones = [
