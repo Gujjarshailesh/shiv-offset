@@ -101,7 +101,7 @@ export default function FAQsPage() {
                 Our team is available Monday to Saturday, 9 AM – 6:30 PM. We&apos;ll get back to you the same working day.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-500 text-slate-900 font-bold px-6 py-3 rounded-xl hover:bg-brand-400 transition-colors text-sm">
+                <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-500 text-white font-bold px-6 py-3 rounded-xl hover:bg-brand-400 transition-colors text-sm">
                   Send Us a Message →
                 </Link>
                 <a href="https://wa.me/918140332132" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-green-400/50 text-green-700 font-semibold px-6 py-3 rounded-xl hover:bg-green-50 transition-colors text-sm">

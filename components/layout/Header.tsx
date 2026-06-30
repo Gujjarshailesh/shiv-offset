@@ -174,7 +174,7 @@ export default function Header() {
             ))}
             <Link
               href="/contact"
-              className="mt-2 flex items-center justify-center gap-2 bg-brand-500 text-slate-900 font-bold px-5 py-3 rounded-xl hover:bg-brand-400 transition-colors"
+              className="mt-2 flex items-center justify-center gap-2 bg-brand-500 text-white font-bold px-5 py-3 rounded-xl hover:bg-brand-400 transition-colors"
             >
               Get a Quote
             </Link>

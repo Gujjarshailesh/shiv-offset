@@ -90,7 +90,7 @@ export default function ServicesPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
                   {Icon && (
                     <div className="absolute top-4 left-4 w-11 h-11 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <Icon className="w-5 h-5 text-slate-900" strokeWidth={1.8} />
+                      <Icon className="w-5 h-5 text-white" strokeWidth={2} />
                     </div>
                   )}
                 </div>
@@ -136,7 +136,7 @@ export default function ServicesPage() {
             {["Share Brief", "Get Quote", "Artwork Approval", "Proof Review", "Print & Finish", "Delivery"].map((step, i) => (
               <div key={step} className="flex items-center gap-3">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-brand-500 text-slate-900 font-black text-lg flex items-center justify-center shadow-lg mb-2">
+                  <div className="w-12 h-12 rounded-full bg-brand-500 text-white font-black text-lg flex items-center justify-center shadow-lg mb-2">
                     {i + 1}
                   </div>
                   <span className="text-sm font-semibold text-white whitespace-nowrap">{step}</span>

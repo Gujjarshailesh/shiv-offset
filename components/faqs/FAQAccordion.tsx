@@ -12,7 +12,7 @@ function FAQ({ q, a, index }: { q: string; a: string; index: number }) {
         className="w-full flex items-center gap-4 px-6 py-5 text-left bg-white hover:bg-brand-50/50 transition-colors"
         aria-expanded={open}
       >
-        <span className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0 transition-all ${open ? "bg-brand-500 text-slate-900" : "bg-slate-100 text-slate-500"}`}>
+        <span className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0 transition-all ${open ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-500"}`}>
           {open ? "−" : String(index + 1).padStart(2, "0")}
         </span>
         <span className={`font-semibold text-[15px] leading-snug flex-1 transition-colors ${open ? "text-brand-600" : "text-slate-800"}`}>{q}</span>

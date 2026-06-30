@@ -139,7 +139,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             <div className="glass rounded-3xl p-8 border border-white/10 hover:border-brand-500/25 transition-colors">
               <div className="w-12 h-12 rounded-xl bg-brand-500 flex items-center justify-center mb-5">
-                <IconTrophy className="w-6 h-6 text-slate-900" strokeWidth={1.8} />
+                <IconTrophy className="w-6 h-6 text-white" strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-black text-white mb-3">Our Mission</h3>
               <p className="text-slate-400 leading-relaxed">
@@ -183,7 +183,7 @@ export default function AboutPage() {
               {milestones.map((m) => (
                 <div key={m.year} className="flex gap-6 group">
                   <div className="relative flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full bg-brand-500 text-slate-900 font-black text-xs flex items-center justify-center z-10 relative shadow-lg group-hover:scale-110 transition-transform text-center leading-tight px-1">
+                    <div className="w-12 h-12 rounded-full bg-brand-500 text-white font-black text-xs flex items-center justify-center z-10 relative shadow-lg group-hover:scale-110 transition-transform text-center leading-tight px-1">
                       {m.year}
                     </div>
                   </div>

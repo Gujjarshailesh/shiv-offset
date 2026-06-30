@@ -44,7 +44,7 @@ export default function GalleryGrid() {
             onClick={() => setActive(cat)}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
               active === cat
-                ? "bg-brand-500 text-slate-900 border-brand-500 shadow-md shadow-brand-500/25 scale-105"
+                ? "bg-brand-500 text-white border-brand-500 shadow-md shadow-brand-500/25 scale-105"
                 : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-brand-400 dark:hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 hover:shadow-sm"
             }`}
           >

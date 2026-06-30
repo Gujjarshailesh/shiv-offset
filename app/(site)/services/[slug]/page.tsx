@@ -102,7 +102,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </nav>
           {Icon && (
             <div className="w-12 h-12 rounded-xl bg-brand-500 flex items-center justify-center mb-4 shadow-lg">
-              <Icon className="w-6 h-6 text-slate-900" strokeWidth={1.8} />
+              <Icon className="w-6 h-6 text-white" strokeWidth={1.8} />
             </div>
           )}
           <h1 className="text-5xl md:text-6xl font-black text-white mb-4 max-w-2xl leading-tight">{service.title}</h1>
@@ -138,7 +138,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 {service.features.map((f) => (
                   <div key={f} className="flex items-start gap-3 p-3.5 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
                     <div className="w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
@@ -171,7 +171,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </p>
                 <Link
                   href="/contact"
-                  className="flex items-center justify-center gap-2 w-full bg-brand-500 text-slate-900 font-bold py-3.5 rounded-xl hover:bg-brand-400 transition-colors mb-3 shadow-lg shadow-brand-500/15"
+                  className="flex items-center justify-center gap-2 w-full bg-brand-500 text-white font-bold py-3.5 rounded-xl hover:bg-brand-400 transition-colors mb-3 shadow-lg shadow-brand-500/15"
                 >
                   Request Quote
                 </Link>
@@ -226,7 +226,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                     <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-colors" />
                     {RelIcon && (
                       <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center shadow">
-                        <RelIcon className="w-4 h-4 text-slate-900" strokeWidth={1.8} />
+                        <RelIcon className="w-4 h-4 text-white" strokeWidth={2} />
                       </div>
                     )}
                   </div>

@@ -48,7 +48,7 @@ export default function ServicesSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 dark:from-slate-900 via-slate-900/30 to-transparent" />
                   {Icon && (
                     <div className="absolute top-4 left-4 w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center shadow-lg">
-                      <Icon className="w-5 h-5 text-slate-900" strokeWidth={1.8} />
+                      <Icon className="w-5 h-5 text-white" strokeWidth={2} />
                     </div>
                   )}
                 </div>
@@ -77,7 +77,7 @@ export default function ServicesSection() {
         <div className="text-center mt-12 reveal">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 border border-brand-500 dark:border-brand-500/50 text-brand-600 dark:text-brand-400 font-semibold px-8 py-4 rounded-xl hover:bg-brand-500 hover:text-slate-900 transition-all duration-200"
+            className="inline-flex items-center gap-2 border border-brand-500 dark:border-brand-500/50 text-brand-600 dark:text-brand-400 font-semibold px-8 py-4 rounded-xl hover:bg-brand-500 hover:text-white transition-all duration-200"
           >
             View All Services
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

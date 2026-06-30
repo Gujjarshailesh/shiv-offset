@@ -49,7 +49,7 @@ export default function IndustriesSection() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     {Icon && (
                       <div className="w-10 h-10 rounded-xl bg-brand-500/90 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                        <Icon className="w-5 h-5 text-slate-900" strokeWidth={1.8} />
+                        <Icon className="w-5 h-5 text-white" strokeWidth={2} />
                       </div>
                     )}
                   </div>

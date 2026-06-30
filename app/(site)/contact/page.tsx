@@ -159,14 +159,14 @@ export default function ContactPage() {
                 />
                 <div className="absolute inset-0 bg-slate-900/40 flex flex-col items-center justify-center text-center p-4">
                   <div className="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center mb-2">
-                    <IconMapPin className="w-5 h-5 text-slate-900" strokeWidth={2} />
+                    <IconMapPin className="w-5 h-5 text-white" strokeWidth={2.2} />
                   </div>
                   <p className="text-white text-sm font-bold">Near Esar Petrol Pump</p>
                   <p className="text-white/60 text-xs">Rajula – 365560</p>
                   <a
                     href="https://maps.google.com/?q=Near+Esar+Petrol+Pump,+Rajula,+Gujarat+365560"
                     target="_blank" rel="noopener noreferrer"
-                    className="mt-3 text-xs bg-white text-slate-900 font-bold px-4 py-1.5 rounded-full hover:bg-brand-500 transition-colors"
+                    className="mt-3 text-xs bg-white text-slate-900 font-bold px-4 py-1.5 rounded-full hover:bg-brand-500 hover:text-white transition-colors"
                   >
                     Open in Maps
                   </a>

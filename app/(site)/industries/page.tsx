@@ -129,7 +129,7 @@ export default function IndustriesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-brand-500 text-slate-900 font-bold px-8 py-4 rounded-xl hover:bg-brand-400 transition-colors shadow-lg shadow-brand-500/15"
+              className="inline-flex items-center justify-center gap-2 bg-brand-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-brand-400 transition-colors shadow-lg shadow-brand-500/15"
             >
               Talk to Our Team
             </a>

@@ -87,7 +87,7 @@ export default function Testimonials() {
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-black text-slate-900 text-lg flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-black text-white text-lg flex-shrink-0">
                         {t.name[0]}
                       </div>
                       <div>
@@ -125,7 +125,7 @@ export default function Testimonials() {
                   : "border-slate-700 bg-slate-800/40 hover:border-slate-500"
               }`}
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-slate-900 text-sm mb-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center font-bold text-white text-sm mb-2">
                 {t.name[0]}
               </div>
               <div className="text-white text-xs font-semibold truncate">{t.name}</div>
